@@ -4,9 +4,7 @@ import { useSpring, animated } from 'react-spring';
 
 function App(){
 
-  const [quoteIndex, updQuoteIndex] = useState(Math.floor(Math.random() * 10));
-  const [colorIndex, updColorIndex] = useState(Math.floor(Math.random() * 9));
-
+  //Arrays containing the data
   const quotes = [
     ["The greatest glory in living lies not in never falling, but in rising every time we fall.", "Nelson Mandela"],
     ["The way to get started is to quit talking and begin doing.", "Walt Disney"],
@@ -20,37 +18,44 @@ function App(){
     ["Don't judge each day by the harvest you reap but by the seeds that you plant.", "Robert Louis Stevenson"],
   ];
 
-  const quote = quotes[quoteIndex];
-
-  function handleClick() {
-    updQuoteIndex(Math.floor(Math.random() * 10));
-    updColorIndex(Math.floor(Math.random() * 9));
-  }
-
-  // Color Selector
   const colors = [
     "#E74C3C", "#9B59B6", "#9B59B6", "#9B59B6", "#9B59B6", "#2ECC71", "#F4D03F", "#AAB7B8", "#F0B27A"
   ]
+
+  // Set the initial states with useState function
+  const [quoteIndex, updQuoteIndex] = useState(() => Math.floor(Math.random() * quotes.length));
+  const [colorIndex, updColorIndex] = useState(() => Math.floor(Math.random() * colors.length));
+
+  const quote = quotes[quoteIndex];
   const color = colors[colorIndex];
 
+  // function to be exhecuted when button is clicked
+  function handleClick() {
+    // Udpate the states in here
+    updQuoteIndex(Math.floor(Math.random() * quotes.length));
+    updColorIndex(Math.floor(Math.random() * colors.length));
+  }
+
+  // Style
   const stylesBg = {
     backgroundColor: color,
   }
-
   const stylesBox = {
     color: color
   }
 
-      // const fade = useSpring({
-    //   from: {
-    //     opacity: 0
-    //   },
-    //   opacity: 1
-    // })
+  // Animations
+
+  const fade = useSpring({
+    from: {
+      opacity: 0
+    },
+    opacity: 1
+  });
 
   return (
     <div className="App" style={stylesBg}>
-      <div id="quote-box" style={stylesBox}>
+      <animated.div id="quote-box" style={stylesBox, fade}>
         <p id="text"><i class="fas fa-quote-left"></i>{" " + quote[0]}</p>
         <p id="author">{quote[1]}</p>
         <div id="btn-container">
@@ -61,7 +66,7 @@ function App(){
             New Quote
           </button>
         </div>
-      </div>
+      </animated.div>
     </div>
   )
 }
