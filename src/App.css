@@ -1,3 +1,16 @@
+.btn{
+  background-color: black;
+  color: #fff;
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.btn:hover{
+  background-color: #555;
+}
+
 .App {
   background-color: #61dafb;
   min-height: 100vh;
@@ -15,10 +28,29 @@
 }
 
 #quote-box {
+  min-width: 300px;
+  max-width: 600px;
   background-color: #fff;
   color: #000;
   margin: auto;
   padding: 30px;
   border-radius: 5px;
 }
+
+#btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#quote-box #text {
+  font-size: 25px;
+}
+
+#quote-box #author {
+  font-size: 16px;
+  text-align: right;
+}
+
+
 
