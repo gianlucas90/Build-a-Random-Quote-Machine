@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class App extends React.Component {
   constructor(props) {
@@ -7,6 +8,7 @@ class App extends React.Component {
     this.state = {
       quote: "",
       author: "",
+      randomColorIndex: Math.floor(Math.random() * 9),
       randomIndex: Math.floor(Math.random() * 10),
     };
     this.handleClick = this.handleClick.bind(this);
@@ -14,7 +16,8 @@ class App extends React.Component {
 
   handleClick(){
     this.setState({
-      randomIndex: Math.floor(Math.random() * 10)
+      randomIndex: Math.floor(Math.random() * 10),
+      randomColorIndex: Math.floor(Math.random() * 9)
     })
   }
 
@@ -34,16 +37,30 @@ class App extends React.Component {
 
     const quote = quotes[this.state.randomIndex];
 
+    // Color Selector
+    const colors = [
+      "#E74C3C", "#9B59B6", "#9B59B6", "#9B59B6", "#9B59B6", "#2ECC71", "#F4D03F", "#AAB7B8", "#F0B27A"
+    ]
+    const color = colors[this.state.randomColorIndex];
+
+    const stylesBg = {
+      backgroundColor: color,
+    }
+
+    const stylesBox = {
+      color: color
+    }
+
     return (
-      <div className="App">
-        <div id="quote-box">
-          <p id="text">{quote[0]}</p>
+      <div className="App" style={stylesBg}>
+        <div id="quote-box" style={stylesBox}>
+          <p id="text"><i class="fas fa-quote-left"></i>{" " + quote[0]}</p>
           <p id="author">{quote[1]}</p>
           <div id="btn-container">
-            <a href="twitter.com/intent/tweet" id="tweet-quote" className="btn">
-              Twitter
+            <a href="twitter.com/intent/tweet" id="tweet-quote" className="btn" style={stylesBg}>
+              <i class="fab fa-twitter"></i>
             </a>
-            <button id="new-quote" className="btn" onClick={this.handleClick}>
+            <button id="new-quote" className="btn" style={stylesBg} onClick={this.handleClick}>
               New Quote
             </button>
           </div>
