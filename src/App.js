@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { useSpring, animated } from 'react-spring';
 
 class App extends React.Component {
   constructor(props) {
@@ -50,6 +50,13 @@ class App extends React.Component {
     const stylesBox = {
       color: color
     }
+
+    // const fade = useSpring({
+    //   from: {
+    //     opacity: 0
+    //   },
+    //   opacity: 1
+    // })
 
     return (
       <div className="App" style={stylesBg}>
